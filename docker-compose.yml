@@ -1,9 +1,9 @@
-volumes:
-  fooocus-data:
+name: ai-services
 
 services:
-  app:
+  fooocus-ai:
     build: .
+    container_name: fooocus-ai
     image: ghcr.io/lllyasviel/fooocus
     ports:
      - "7865:7865"
@@ -23,9 +23,9 @@ services:
       - path_fooocus_expansion=/content/data/models/prompt_expansion/fooocus_expansion/
       - path_outputs=/content/app/outputs/    # Warning: If it is not located under '/content/app', you can't see history log!
     volumes:
-      - fooocus-data:/content/data
-      #- ./models:/import/models   # Once you import files, you don't need to mount again.
-      #- ./outputs:/import/outputs  # Once you import files, you don't need to mount again.
+      - G:/projects/docker/volumes/fooocus-ai-data:/content/data
+      - ./models:/import/models   # Once you import files, you don't need to mount again.
+      - ./outputs:/import/outputs  # Once you import files, you don't need to mount again.
     tty: true
     deploy:
       resources:
